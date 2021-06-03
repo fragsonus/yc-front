@@ -75,12 +75,12 @@ const Home: React.FC = () => {
         <Text>{TranslateString(578, 'Top 3 best DEFI app on Binance Smart Chain.')}</Text>
       </Hero> */}
       <Flex style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-        <a href="." style={{ fontSize: '60px', color: '#ffffff', textAlign: 'center', fontFamily: 'Pacifico', marginBottom: '32px'}}>
+        <a href="/yc-front" style={{ fontSize: '60px', color: '#ffffff', textAlign: 'center', fontFamily: 'Pacifico', marginBottom: '32px'}}>
           Yumcha
         </a>
       </Flex>
       <Flex justifyContent="center" style={{ fontSize: '50px', color: '#ffffff'}}>
-        <a href="farms" style={{paddingRight: '20px'}}>{faplaycircle}</a>
+        <a href="/yc-farms" style={{paddingRight: '20px'}}>{faplaycircle}</a>
         {/* <a href="dashboard" style={{paddingRight: '8px'}}>{fatacho}</a> */}
         <a href="https://docs.yumcha.finance/" style={{paddingRight: '20px'}}>{fabook}</a>
         <a href="https://t.me/yumchafinance" style={{paddingRight: '20px'}}>{fatelegram}</a>

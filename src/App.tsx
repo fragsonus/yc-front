@@ -28,7 +28,7 @@ BigNumber.config({
 })
 
 const Background = styled.div`
-  background-image: url('/images/background2.png');
+  background-image: url('/yc-front/images/background2.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -52,10 +52,10 @@ const App: React.FC = () => {
       {/* <Menu> */}
       <Suspense fallback={<PageLoader />}>
         <Switch>
-        <Route path="/" exact>
+        {/* <Route path="/yc-front" exact>
             <Home />
-          </Route>
-          <Route path="/farms">
+          </Route> */}
+          <Route path="/yc-front">
             <Farms />
           </Route>
           {/* <Route path="/nests">

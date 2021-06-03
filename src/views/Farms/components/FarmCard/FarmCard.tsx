@@ -142,7 +142,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
         farmImage={farmImage}
         tokenSymbol={farm.tokenSymbol}
       /> */}
-      <Text bold style={{fontSize: "36px"}}>
+      <Text bold style={{fontSize: "30px"}}>
         {lpLabel}
       </Text>
       <DetailsSection
