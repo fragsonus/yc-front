@@ -1,5 +1,6 @@
 {
-  "name": "goose-frontend",
+  "name": "yc-frontend",
+  "homepage" : "https://fragsonus.github.io/yc-front",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,6 +9,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'"
   },
@@ -33,7 +36,11 @@
     "@binance-chain/bsc-use-wallet": "^0.8.1",
     "@crowdin/crowdin-api-client": "^1.10.1",
     "@ethersproject/abi": "^5.0.7",
-    "@pancakeswap-libs/uikit": "goosedefi/goose-uikit",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-brands-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@pancakeswap-libs/uikit": "fragsonus/yc-uikit",
     "@reduxjs/toolkit": "^1.5.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -41,6 +48,7 @@
     "@types/styled-components": "^5.1.7",
     "bignumber.js": "^9.0.0",
     "chart.js": "^2.9.4",
+    "gh-pages": "^3.2.0",
     "iframe-resizer-react": "^1.1.0",
     "lodash": "^4.17.20",
     "react": "^17.0.1",

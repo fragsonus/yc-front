@@ -13,7 +13,7 @@ import StakeAction from './StakeAction'
 import HarvestAction from './HarvestAction'
 
 const Action = styled.div`
-  padding-top: 16px;
+  padding-top: 0px;
 `
 export interface FarmWithStakedValue extends Farm {
   apy?: BigNumber
@@ -31,15 +31,15 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
   const { pid, lpAddresses, tokenAddresses, isTokenOnly, depositFeeBP } = useFarmFromPid(farm.pid)
   const { allowance, tokenBalance, stakedBalance, earnings } = useFarmUser(pid)
   const lpAddress = lpAddresses[process.env.REACT_APP_CHAIN_ID]
-  const tokenAddress = tokenAddresses[process.env.REACT_APP_CHAIN_ID];
+  const tokenAddress = tokenAddresses[process.env.REACT_APP_CHAIN_ID]
   const lpName = farm.lpSymbol.toUpperCase()
   const isApproved = account && allowance && allowance.isGreaterThan(0)
 
   const lpContract = useMemo(() => {
-    if(isTokenOnly){
-      return getContract(ethereum as provider, tokenAddress);
+    if (isTokenOnly) {
+      return getContract(ethereum as provider, tokenAddress)
     }
-    return getContract(ethereum as provider, lpAddress);
+    return getContract(ethereum as provider, lpAddress)
   }, [ethereum, lpAddress, tokenAddress, isTokenOnly])
 
   const { onApprove } = useApprove(lpContract)
@@ -56,7 +56,13 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
 
   const renderApprovalOrStakeButton = () => {
     return isApproved ? (
-      <StakeAction stakedBalance={stakedBalance} tokenBalance={tokenBalance} tokenName={lpName} pid={pid} depositFeeBP={depositFeeBP} />
+      <StakeAction
+        stakedBalance={stakedBalance}
+        tokenBalance={tokenBalance}
+        tokenName={lpName}
+        pid={pid}
+        depositFeeBP={depositFeeBP}
+      />
     ) : (
       <Button mt="8px" fullWidth disabled={requestedApproval} onClick={handleApprove}>
         {TranslateString(999, 'Approve Contract')}
@@ -66,24 +72,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
 
   return (
     <Action>
-      <Flex>
-        <Text bold textTransform="uppercase" color="secondary" fontSize="12px" pr="3px">
-          {/* TODO: Is there a way to get a dynamic value here from useFarmFromSymbol? */}
-          EGG
-        </Text>
-        <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">
-          {TranslateString(999, 'Earned')}
-        </Text>
-      </Flex>
       <HarvestAction earnings={earnings} pid={pid} />
-      <Flex>
-        <Text bold textTransform="uppercase" color="secondary" fontSize="12px" pr="3px">
-          {lpName}
-        </Text>
-        <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">
-          {TranslateString(999, 'Staked')}
-        </Text>
-      </Flex>
       {!account ? <UnlockButton mt="8px" fullWidth /> : renderApprovalOrStakeButton()}
     </Action>
   )

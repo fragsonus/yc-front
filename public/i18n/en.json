@@ -645,25 +645,25 @@
     {
       "data": {
         "stringId": 534,
-        "text": "Egg Stats"
+        "text": "Statistics"
       }
     },
     {
       "data": {
         "stringId": 536,
-        "text": "Total Minted"
+        "text": "Total Yumcha Minted"
       }
     },
     {
       "data": {
         "stringId": 538,
-        "text": "Total Burned"
+        "text": "Total Yumcha Burned"
       }
     },
     {
       "data": {
         "stringId": 540,
-        "text": "New EGG\/block"
+        "text": "New Yumcha\/block"
       }
     },
     {
@@ -753,7 +753,7 @@
     {
       "data": {
         "stringId": 576,
-        "text": "Goose Finance"
+        "text": "Yumcha"
       }
     },
     {
@@ -1233,13 +1233,55 @@
     {
       "data": {
         "stringId": 10004,
-        "text": "Circulating Supply"
+        "text": "Circulating Yumcha"
       }
     },
     {
       "data": {
         "stringId": 10005,
-        "text": "Market Cap"
+        "text": "Market Capitalisation"
+      }
+    },
+    {
+      "data": {
+        "stringId": 10006,
+        "text": "Token Price"
+      }
+    },
+    {
+      "data": {
+        "stringId": 10007,
+        "text": "TVL"
+      }
+    },
+    {
+      "data": {
+        "stringId": 10008,
+        "text": "LP Price"
+      }
+    },
+    {
+      "data": {
+        "stringId": 10009,
+        "text": "Buy on Pancake Swap"
+      }
+    },
+    {
+      "data": {
+        "stringId": 10010,
+        "text": "Charts on Dex Guru"
+      }
+    },
+    {
+      "data": {
+        "stringId": 10011,
+        "text": "Add LP"
+      }
+    },
+    {
+      "data": {
+        "stringId": 10012,
+        "text": "Rmv LP"
       }
     }
   ],

@@ -4,8 +4,10 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { ResetCSS } from '@pancakeswap-libs/uikit'
 import BigNumber from 'bignumber.js'
 import { useFetchPublicData } from 'state/hooks'
+import styled from 'styled-components'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
+// import Header from './components/Header'
 import PageLoader from './components/PageLoader'
 import NftGlobalNotification from './views/Nft/components/NftGlobalNotification'
 
@@ -25,6 +27,13 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
+const Background = styled.div`
+  background-image: url('/images/background2.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+`
+
 const App: React.FC = () => {
   const { account, connect } = useWallet()
   useEffect(() => {
@@ -36,47 +45,49 @@ const App: React.FC = () => {
   useFetchPublicData()
 
   return (
+    <Background>
     <Router>
       <ResetCSS />
       <GlobalStyle />
-      <Menu>
-        <Suspense fallback={<PageLoader />}>
-          <Switch>
-            <Route path="/" exact>
-              <Home />
-            </Route>
-            <Route path="/farms">
-              <Farms />
-            </Route>
-            <Route path="/nests">
-              <Farms tokenMode/>
-            </Route>
-            {/* <Route path="/pools"> */}
-            {/*  <Pools /> */}
-            {/* </Route> */}
-            {/* <Route path="/lottery"> */}
-            {/*  <Lottery /> */}
-            {/* </Route> */}
-            {/* <Route path="/ifo"> */}
-            {/*  <Ifos /> */}
-            {/* </Route> */}
-            {/* <Route path="/nft"> */}
-            {/*  <Nft /> */}
-            {/* </Route> */}
-            {/* Redirect */}
-            {/* <Route path="/staking"> */}
-            {/*  <Redirect to="/pools" /> */}
-            {/* </Route> */}
-            {/* <Route path="/syrup"> */}
-            {/*  <Redirect to="/pools" /> */}
-            {/* </Route> */}
-            {/* 404 */}
-            <Route component={NotFound} />
-          </Switch>
-        </Suspense>
-      </Menu>
-      <NftGlobalNotification />
+      {/* <Menu> */}
+      <Suspense fallback={<PageLoader />}>
+        <Switch>
+        <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/farms">
+            <Farms />
+          </Route>
+          {/* <Route path="/nests">
+            <Farms tokenMode />
+          </Route> */}
+          {/* <Route path="/pools"> */}
+          {/*  <Pools /> */}
+          {/* </Route> */}
+          {/* <Route path="/lottery"> */}
+          {/*  <Lottery /> */}
+          {/* </Route> */}
+          {/* <Route path="/ifo"> */}
+          {/*  <Ifos /> */}
+          {/* </Route> */}
+          {/* <Route path="/nft"> */}
+          {/*  <Nft /> */}
+          {/* </Route> */}
+          {/* Redirect */}
+          {/* <Route path="/staking"> */}
+          {/*  <Redirect to="/pools" /> */}
+          {/* </Route> */}
+          {/* <Route path="/syrup"> */}
+          {/*  <Redirect to="/pools" /> */}
+          {/* </Route> */}
+          {/* 404 */}
+          <Route component={NotFound} />
+        </Switch>
+      </Suspense>
+      {/* </Menu> */}
+      {/* <NftGlobalNotification /> */}
     </Router>
+    </Background>
   )
 }
 

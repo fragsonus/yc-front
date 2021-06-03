@@ -51,27 +51,50 @@ const DetailsSection: React.FC<ExpandableSectionProps> = ({
   return (
     <Wrapper>
       <Flex justifyContent="space-between">
-        <Text>{TranslateString(316, 'Stake')}:</Text>
-        <StyledLinkExternal href={
-          isTokenOnly ?
-            `https://exchange.goosedefi.com/#/swap/${tokenAddresses[process.env.REACT_APP_CHAIN_ID]}`
-            :
-          `https://exchange.goosedefi.com/#/add/${liquidityUrlPathParts}`
-        }>
-          {lpLabel}
-        </StyledLinkExternal>
+        <a
+          href={`https://dex.guru/token/${tokenAddresses[process.env.REACT_APP_CHAIN_ID]}-bsc`}
+        >
+          <Text bold style={{fontSize: "18px"}}>Chart</Text>
+        </a>
+        <a
+          href={
+            isTokenOnly
+              ? `https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xe9e7cea3dedca5984780bafc599bd69add087d56&outputCurrency=${tokenAddresses[process.env.REACT_APP_CHAIN_ID]}`
+              : `https://exchange.pancakeswap.finance/#/swap?inputCurrency=${quoteTokenAdresses[process.env.REACT_APP_CHAIN_ID]}&outputCurrency=${tokenAddresses[process.env.REACT_APP_CHAIN_ID]}`
+          }
+        >
+          <Text bold style={{fontSize: "18px"}}>Buy</Text>
+        </a>
+        <a
+          href={
+            isTokenOnly
+              ? `https://exchange.pancakeswap.finance/#/swap/${tokenAddresses[process.env.REACT_APP_CHAIN_ID]}`
+              : `https://exchange.pancakeswap.finance/#/add/${liquidityUrlPathParts}`
+          }
+        >
+          <Text bold style={{fontSize: "18px"}}>Add</Text>
+        </a>
+        <a
+          href={
+            isTokenOnly
+              ? `https://exchange.pancakeswap.finance/#/swap/${tokenAddresses[process.env.REACT_APP_CHAIN_ID]}`
+              : `https://exchange.pancakeswap.finance/#/remove/${liquidityUrlPathParts}`
+          }
+        >
+          <Text bold style={{fontSize: "18px"}}>Rmv</Text>
+        </a>
       </Flex>
-      {!removed && (
+      {/* {!removed && (
         <Flex justifyContent="space-between">
           <Text>{TranslateString(23, 'Total Liquidity')}:</Text>
           <Text>{totalValueFormated}</Text>
         </Flex>
-      )}
-      <Flex justifyContent="flex-start">
+      )} */}
+      {/* <Flex justifyContent="flex-start">
         <Link external href={bscScanAddress} bold={false}>
           {TranslateString(356, 'View on BscScan')}
         </Link>
-      </Flex>
+      </Flex> */}
     </Wrapper>
   )
 }
