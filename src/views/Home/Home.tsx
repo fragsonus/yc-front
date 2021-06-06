@@ -6,10 +6,18 @@ import Page from 'components/layout/Page'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTachometerAlt , faPlayCircle , faBook } from '@fortawesome/free-solid-svg-icons'
 import { faTelegram , faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { Info } from 'react-feather'
 import Divider from './components/Divider'
 import FarmStakingCard from './components/FarmStakingCard'
 import LotteryCard from './components/LotteryCard'
 import CakeStats from './components/CakeStats'
+import Mechanics from './components/Mechanics'
+import MechanicsUp from './components/MechanicsUp'
+import MechanicsDown from './components/MechanicsDown'
+import ChangeLog from './components/ChangeLog'
+import Perimetry from './components/Perimetry'
+import ContractInfo from './components/ContractInfo'
+import InfoCard from './components/InfoCard'
 import TotalValueLockedCard from './components/TotalValueLockedCard'
 import TwitterCard from './components/TwitterCard'
 
@@ -36,7 +44,7 @@ const Hero = styled.div`
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;
-  justify-content: stretch;
+  justify-content: center;
   margin-bottom: 48px;
 
   & > div {
@@ -46,7 +54,7 @@ const Cards = styled(BaseLayout)`
 
   ${({ theme }) => theme.mediaQueries.sm} {
     & > div {
-      grid-column: span 8;
+      grid-column: span 16;
     }
   }
 
@@ -75,22 +83,29 @@ const Home: React.FC = () => {
         <Text>{TranslateString(578, 'Top 3 best DEFI app on Binance Smart Chain.')}</Text>
       </Hero> */}
       <Flex style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-        <a href="/yc-front" style={{ fontSize: '60px', color: '#ffffff', textAlign: 'center', fontFamily: 'Pacifico', marginBottom: '32px'}}>
+        <a href="/" style={{ fontSize: '60px', color: '#ffffff', textAlign: 'center', fontFamily: 'Pacifico', marginBottom: '32px'}}>
           Yumcha
         </a>
       </Flex>
       <Flex justifyContent="center" style={{ fontSize: '50px', color: '#ffffff'}}>
-        <a href="/yc-farms" style={{paddingRight: '20px'}}>{faplaycircle}</a>
-        {/* <a href="dashboard" style={{paddingRight: '8px'}}>{fatacho}</a> */}
+        {/* <a href="/yc-farms" style={{paddingRight: '20px'}}>{faplaycircle}</a>
+        <a href="dashboard" style={{paddingRight: '8px'}}>{fatacho}</a>
         <a href="https://docs.yumcha.finance/" style={{paddingRight: '20px'}}>{fabook}</a>
         <a href="https://t.me/yumchafinance" style={{paddingRight: '20px'}}>{fatelegram}</a>
-        <a href="https://twitter.com/yumchaf">{fatwitter}</a>
+        <a href="https://twitter.com/yumchaf">{fatwitter}</a> */}
       </Flex>
       <Divider />
       <div>
-        {/* <Cards>
-          <TotalValueLockedCard />
-        </Cards> */}
+        <Cards>
+          <InfoCard />
+          <CakeStats />
+          <ChangeLog />
+          <Perimetry />
+          <Mechanics />
+          <MechanicsUp />
+          <MechanicsDown />
+          <ContractInfo />
+        </Cards>
       </div>
     </Page>
   )

@@ -17,7 +17,7 @@ const StyledCakeStats = styled(Card)`
 const Row = styled.div`
   align-items: center;
   display: flex;
-  font-size: 14px;
+  font-size: 13px;
   justify-content: space-between;
   margin-bottom: 8px;
 `
@@ -40,31 +40,46 @@ const CakeStats = () => {
   return (
     <StyledCakeStats>
       <CardBody>
-        {/* <Heading size="xl" mb="24px">
-          {TranslateString(534, 'Egg Stats')}
-        </Heading> */}
+        <Row><Text bold>Yumcha Tokenomics</Text></Row>
+
+        <Row><Text bold fontSize="13px">Yumcha tokens earn revenue from the following sources:</Text></Row>
+        <Row><Text fontSize="13px">- Yield farming of dimSim reserves from external farms</Text></Row>
+        <Row><Text fontSize="13px">- Arbitrage from the minting and buyback of dimSims</Text></Row>
+
+        <Row><Text bold fontSize="13px">Yumcha tokens are provided to liquidity providers:</Text></Row>
         <Row>
-          <Text fontSize="14px">{TranslateString(10005, 'Market Cap')}</Text>
-          <CardValue fontSize="14px" value={getBalanceNumber(marketCap)} decimals={0} prefix="$" />
+          <Text fontSize="13px">- yumcha per block for the first year</Text>
+          <Text bold fontSize="13px">1.0888</Text>
         </Row>
         <Row>
-          <Text fontSize="14px">{TranslateString(536, 'Total Minted')}</Text>
-          {totalSupply && <CardValue fontSize="14px" value={getBalanceNumber(totalSupply)} decimals={0} />}
+          <Text fontSize="13px">- yumcha per block for the second year</Text>
+          <Text bold fontSize="13px">0.8166</Text>
         </Row>
         <Row>
-          <Text fontSize="14px">{TranslateString(538, 'Total Burned')}</Text>
-          <CardValue fontSize="14px" value={getBalanceNumber(burnedBalance)} decimals={0} />
+          <Text fontSize="13px">- yumcha per block for the third year</Text>
+          <Text bold fontSize="13px">0.5444</Text>
         </Row>
         <Row>
-          <Text fontSize="14px">{TranslateString(10004, 'Circulating Supply')}</Text>
-          {cakeSupply && <CardValue fontSize="14px" value={cakeSupply} decimals={0} />}
+          <Text fontSize="13px">- yumcha per block for the fourth year</Text>
+          <Text bold fontSize="13px">0.2722</Text>
+        </Row>
+        
+        <Row><Text bold fontSize="13px">The current circulating yumcha supply:</Text></Row>
+        <Row>
+          <Text fontSize="13px">- {TranslateString(536, 'Total Minted')}</Text>
+          {totalSupply && <CardValue fontSize="13px" value={getBalanceNumber(totalSupply)} decimals={0} />}
         </Row>
         <Row>
-          <Text fontSize="14px">{TranslateString(540, 'New EGG/block')}</Text>
-          <Text bold fontSize="14px">
-            {/* {yumchaPerBlock} */}
-            1.088
-          </Text>
+          <Text fontSize="13px">- {TranslateString(538, 'Total Burned')}</Text>
+          <CardValue fontSize="13px" value={getBalanceNumber(burnedBalance)} decimals={0} />
+        </Row>
+        <Row>
+          <Text fontSize="13px">- {TranslateString(10004, 'Circulating Supply')}</Text>
+          {cakeSupply && <CardValue fontSize="13px" value={cakeSupply} decimals={0} />}
+        </Row>
+        <Row>
+          <Text fontSize="13px">- {TranslateString(10005, 'Market Cap')}</Text>
+          <CardValue fontSize="13px" value={getBalanceNumber(marketCap)} decimals={0} prefix="$" />
         </Row>
       </CardBody>
     </StyledCakeStats>

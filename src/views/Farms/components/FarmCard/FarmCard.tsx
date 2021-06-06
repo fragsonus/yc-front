@@ -117,8 +117,42 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
   }, [bnbPrice, cakePrice, farm.lpTotalInQuoteToken, farm.quoteTokenSymbol])
 
   const totalValueFormated = totalValue
-    ? `$${Number(totalValue).toLocaleString(undefined, { maximumFractionDigits: 0 })}`
-    : '-'
+  ? `$${Number(totalValue).toLocaleString(undefined, { maximumFractionDigits: 0 })}`
+  : '-'
+
+  const tokenPrice: BigNumber = useMemo(() => {
+    if (!farm.tokenPriceVsQuote) {
+      return null
+    }
+    if (farm.quoteTokenSymbol === QuoteToken.BNB) {
+      return bnbPrice.times(farm.tokenPriceVsQuote)
+    }
+    if (farm.quoteTokenSymbol === QuoteToken.CAKE) {
+      return cakePrice.times(farm.tokenPriceVsQuote)
+    }
+    return farm.tokenPriceVsQuote
+  }, [bnbPrice, cakePrice, farm.tokenPriceVsQuote, farm.quoteTokenSymbol])
+
+  const tokenPriceFormatted = tokenPrice
+  ? `$${Number(tokenPrice).toLocaleString(undefined, { maximumFractionDigits: 3 })}`
+  : '-'
+
+  const LpPrice: BigNumber = useMemo(() => {
+    if (!farm.lpTotalInQuoteToken) {
+      return null
+    }
+    if (farm.quoteTokenSymbol === QuoteToken.BNB) {
+      return bnbPrice.times(farm.lpTotalInQuoteToken).div(farm.lpSupply)
+    }
+    if (farm.quoteTokenSymbol === QuoteToken.CAKE) {
+      return cakePrice.times(farm.lpTotalInQuoteToken).div(farm.lpSupply)
+    }
+    return bnbPrice.times(farm.lpTotalInQuoteToken).div(farm.lpSupply).div(bnbPrice)
+  }, [bnbPrice, cakePrice, farm.lpTotalInQuoteToken, farm.quoteTokenSymbol, farm.lpSupply])
+
+  const LpPriceFormatted = LpPrice
+  ? `$${Number(LpPrice).toLocaleString(undefined, { maximumFractionDigits: 3 })}`
+  : '-'
 
   const lpLabel = farm.lpSymbol
   const earnLabel = 'EGG'
@@ -192,11 +226,11 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
       </Flex> */}
       <Flex justifyContent="space-between">
         <Text>{TranslateString(10006, 'Price')}</Text>
-        <Text>${Math.floor(+farm.tokenPriceVsQuote*1000)/1000}</Text>
+        <Text>{tokenPriceFormatted}</Text>
       </Flex>
       <Flex justifyContent="space-between">
         <Text>{TranslateString(10008, 'LP Price')}</Text>
-        <Text>${Math.floor((+farm.lpTotalInQuoteToken)/(+farm.lpSupply)*1000)/1000}</Text>
+        <Text>{LpPriceFormatted}</Text>
       </Flex>
       <Flex justifyContent="space-between">
         <Text>{TranslateString(10007, 'TVL')}</Text>

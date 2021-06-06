@@ -19,6 +19,22 @@ const farms: FarmConfig[] = [
     quoteTokenAdresses: contracts.busd,
   },
   {
+    pid: 18,
+    risk: 5,
+    lpSymbol: 'yumcha-BNB v2',
+    lpAddresses: {
+      97: '',
+      56: '0xb3aed717ff994eaac638f005997a7a06d1731cdf',
+    },
+    tokenSymbol: 'yumcha',
+    tokenAddresses: {
+      97: '',
+      56: '0xc7d0ce2961396d02059f06e8df7dd37e6809d478',
+    },
+    quoteTokenSymbol: QuoteToken.BNB,
+    quoteTokenAdresses: contracts.wbnb,
+  },
+  {
     pid: 10,
     risk: 5,
     lpSymbol: 'yumcha-BNB v1',
