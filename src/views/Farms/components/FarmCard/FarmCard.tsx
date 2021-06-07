@@ -158,7 +158,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
   const earnLabel = 'EGG'
   const farmAPY =
     farm.apy &&
-    farm.apy.times(new BigNumber(100)).toNumber().toLocaleString(undefined, {
+    farm.apy.div(farm.quoteTokenSymbol === QuoteToken.CAKE ? (cakePrice) : 1 ).times(new BigNumber(100)).toNumber().toLocaleString(undefined, {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     })

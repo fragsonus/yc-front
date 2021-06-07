@@ -83,6 +83,22 @@ const farms: FarmConfig[] = [
     quoteTokenAdresses: contracts.busd,
   },
   {
+    pid: 19,
+    risk: 1,
+    lpSymbol: 'ycVT-yumcha v2',
+    lpAddresses: {
+      97: '',
+      56: '0x943363eeF3432Eb50f2Da0fa5DBcF1cE397Bd47b',
+    },
+    tokenSymbol: 'ycVT',
+    tokenAddresses: {
+      97: '',
+      56: '0x7d0943bd8225848ecd84cdec36c39f4470494f07',
+    },
+    quoteTokenSymbol: QuoteToken.CAKE,
+    quoteTokenAdresses: contracts.cake,
+  },
+  {
     pid: 2,
     risk: 5,
     isTokenOnly: true,

@@ -16,6 +16,7 @@ import MechanicsUp from './components/MechanicsUp'
 import MechanicsDown from './components/MechanicsDown'
 import ChangeLog from './components/ChangeLog'
 import Perimetry from './components/Perimetry'
+import VanguardInfo from './components/VanguardInfo'
 import ContractInfo from './components/ContractInfo'
 import InfoCard from './components/InfoCard'
 import TotalValueLockedCard from './components/TotalValueLockedCard'
@@ -99,6 +100,7 @@ const Home: React.FC = () => {
         <Cards>
           <InfoCard />
           <CakeStats />
+          <VanguardInfo />
           <ChangeLog />
           <Perimetry />
           <Mechanics />
