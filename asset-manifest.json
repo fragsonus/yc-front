@@ -8,8 +8,8 @@
     "static/js/2.5f863fd7.chunk.js.map": "/yc-front/static/js/2.5f863fd7.chunk.js.map",
     "main.js": "/yc-front/static/js/main.aa16a0b6.chunk.js",
     "main.js.map": "/yc-front/static/js/main.aa16a0b6.chunk.js.map",
-    "runtime-main.js": "/yc-front/static/js/runtime-main.10dcde64.js",
-    "runtime-main.js.map": "/yc-front/static/js/runtime-main.10dcde64.js.map",
+    "runtime-main.js": "/yc-front/static/js/runtime-main.4d1f34aa.js",
+    "runtime-main.js.map": "/yc-front/static/js/runtime-main.4d1f34aa.js.map",
     "static/js/5.20124c61.chunk.js": "/yc-front/static/js/5.20124c61.chunk.js",
     "static/js/5.20124c61.chunk.js.map": "/yc-front/static/js/5.20124c61.chunk.js.map",
     "static/js/6.aadf8838.chunk.js": "/yc-front/static/js/6.aadf8838.chunk.js",
@@ -18,8 +18,8 @@
     "static/js/7.f04f3212.chunk.js.map": "/yc-front/static/js/7.f04f3212.chunk.js.map",
     "static/js/8.25271fa9.chunk.js": "/yc-front/static/js/8.25271fa9.chunk.js",
     "static/js/8.25271fa9.chunk.js.map": "/yc-front/static/js/8.25271fa9.chunk.js.map",
-    "static/js/9.00518638.chunk.js": "/yc-front/static/js/9.00518638.chunk.js",
-    "static/js/9.00518638.chunk.js.map": "/yc-front/static/js/9.00518638.chunk.js.map",
+    "static/js/9.51eceb23.chunk.js": "/yc-front/static/js/9.51eceb23.chunk.js",
+    "static/js/9.51eceb23.chunk.js.map": "/yc-front/static/js/9.51eceb23.chunk.js.map",
     "static/js/10.6296ec2e.chunk.js": "/yc-front/static/js/10.6296ec2e.chunk.js",
     "static/js/10.6296ec2e.chunk.js.map": "/yc-front/static/js/10.6296ec2e.chunk.js.map",
     "static/js/11.d14bb748.chunk.js": "/yc-front/static/js/11.d14bb748.chunk.js",
@@ -42,7 +42,7 @@
     "static/js/8.25271fa9.chunk.js.LICENSE.txt": "/yc-front/static/js/8.25271fa9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.10dcde64.js",
+    "static/js/runtime-main.4d1f34aa.js",
     "static/js/5.20124c61.chunk.js",
     "static/js/main.aa16a0b6.chunk.js"
   ]
