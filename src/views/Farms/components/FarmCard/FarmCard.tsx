@@ -151,11 +151,11 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
   }, [bnbPrice, cakePrice, farm.lpTotalInQuoteToken, farm.quoteTokenSymbol, farm.lpSupply])
 
   const LpPriceFormatted = LpPrice
-  ? `$${Number(LpPrice).toLocaleString(undefined, { maximumFractionDigits: 3 })}`
+  ? `${Number(LpPrice).toLocaleString(undefined, { maximumFractionDigits: 3 })}`
   : '-'
 
   const lpLabel = farm.lpSymbol
-  const earnLabel = 'EGG'
+  const earnLabel = 'Yumcha'
   const farmAPY =
     farm.apy &&
     farm.apy.div(farm.quoteTokenSymbol === QuoteToken.CAKE ? (cakePrice) : 1 ).times(new BigNumber(100)).toNumber().toLocaleString(undefined, {
@@ -167,7 +167,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
 
   return (
     <FCard>
-      {farm.tokenSymbol === 'EGG' && <StyledCardAccent />}
+      {farm.tokenSymbol === 'Yumcha' && <StyledCardAccent />}
       {/* <CardHeading
         lpLabel={lpLabel}
         multiplier={farm.multiplier}
@@ -230,7 +230,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
       </Flex>
       <Flex justifyContent="space-between">
         <Text>{TranslateString(10008, 'LP Price')}</Text>
-        <Text>{LpPriceFormatted}</Text>
+        <Text>${LpPriceFormatted}</Text>
       </Flex>
       <Flex justifyContent="space-between">
         <Text>{TranslateString(10007, 'TVL')}</Text>
@@ -242,7 +242,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
         expanded={showExpandableSection}
       /> */}
       {/* <ExpandingWrapper expanded={showExpandableSection}> */}
-       <CardActionsContainer farm={farm} ethereum={ethereum} account={account} />
+       <CardActionsContainer farm={farm} ethereum={ethereum} account={account} LpPrice={LpPriceFormatted}/>
       {/* </ExpandingWrapper> */}
     </FCard>
   )

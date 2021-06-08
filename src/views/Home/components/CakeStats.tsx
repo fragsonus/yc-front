@@ -27,10 +27,10 @@ const CakeStats = () => {
   const totalSupply = useTotalSupply()
   const burnedBalance = useBurnedBalance(getCakeAddress())
   const farms = useFarms()
-  const eggPrice = usePriceCakeBusd()
+  const ycPrice = usePriceCakeBusd()
   const circSupply = totalSupply ? totalSupply.minus(burnedBalance) : new BigNumber(0)
   const cakeSupply = getBalanceNumber(circSupply)
-  const marketCap = eggPrice.times(circSupply)
+  const marketCap = ycPrice.times(circSupply)
 
   let yumchaPerBlock = 0
   if (farms && farms[0] && farms[0].yumchaPerBlock) {
@@ -46,22 +46,24 @@ const CakeStats = () => {
         <Row><Text fontSize="13px">- Yield farming of dimSim reserves from external farms</Text></Row>
         <Row><Text fontSize="13px">- Arbitrage from the minting and buyback of dimSims</Text></Row>
 
-        <Row><Text bold fontSize="13px">Yumcha tokens are provided to liquidity providers:</Text></Row>
+        <Row><Text bold fontSize="13px">Yumcha tokens are provided to liquidity providers and decreases by 40% every year:</Text></Row>
         <Row>
           <Text fontSize="13px">- yumcha per block for the first year</Text>
           <Text bold fontSize="13px">1.0888</Text>
         </Row>
         <Row>
           <Text fontSize="13px">- yumcha per block for the second year</Text>
-          <Text bold fontSize="13px">0.8166</Text>
+          <Text bold fontSize="13px">0.6533</Text>
         </Row>
         <Row>
           <Text fontSize="13px">- yumcha per block for the third year</Text>
-          <Text bold fontSize="13px">0.5444</Text>
+          <Text bold fontSize="13px">0.3920</Text>
         </Row>
         <Row>
-          <Text fontSize="13px">- yumcha per block for the fourth year</Text>
-          <Text bold fontSize="13px">0.2722</Text>
+          <Text fontSize="13px">...</Text>
+        </Row>
+        <Row>
+          <Text fontSize="13px">This continues for the following years and the max supply of Yumcha will approach 28,613,664.</Text>
         </Row>
         
         <Row><Text bold fontSize="13px">The current circulating yumcha supply:</Text></Row>

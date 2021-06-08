@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
-import { Button, Flex, Heading, IconButton, AddIcon, MinusIcon, useModal } from '@pancakeswap-libs/uikit'
+import { Button, Flex, Heading, IconButton, AddIcon, MinusIcon, useModal, Text } from '@pancakeswap-libs/uikit'
 import useI18n from 'hooks/useI18n'
 import useStake from 'hooks/useStake'
 import useUnstake from 'hooks/useUnstake'
@@ -15,6 +15,9 @@ interface FarmCardActionsProps {
   tokenName?: string
   pid?: number
   depositFeeBP?: number
+  lpTotal?: BigNumber
+  lpSupply?: BigNumber
+  LpPrice?: string
 }
 
 const IconButtonWrapper = styled.div`
@@ -24,13 +27,15 @@ const IconButtonWrapper = styled.div`
   }
 `
 
-const StakeAction: React.FC<FarmCardActionsProps> = ({ stakedBalance, tokenBalance, tokenName, pid, depositFeeBP }) => {
+const StakeAction: React.FC<FarmCardActionsProps> = ({ stakedBalance, tokenBalance, tokenName, pid, depositFeeBP, lpTotal, lpSupply, LpPrice }) => {
   const TranslateString = useI18n()
   const { onStake } = useStake(pid)
   const { onUnstake } = useUnstake(pid)
 
   const rawStakedBalance = getBalanceNumber(stakedBalance)
   const displayBalance = rawStakedBalance.toLocaleString()
+  const rawdisplayAmount = rawStakedBalance * parseFloat(LpPrice) * (pid === 18 ? 1000 : 1)
+  const displayAmount = rawdisplayAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })
 
   const [onPresentDeposit] = useModal(
     <DepositModal max={tokenBalance} onConfirm={onStake} tokenName={tokenName} depositFeeBP={depositFeeBP} />,
@@ -55,10 +60,15 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({ stakedBalance, tokenBalan
   }
 
   return (
-    <Flex justifyContent="space-between" alignItems="center">
-      <Heading color={rawStakedBalance === 0 ? 'textDisabled' : 'text'}>{displayBalance}</Heading>
-      {renderStakingButtons()}
-    </Flex>
+    <div>
+      <Flex justifyContent="space-between" alignItems="center">
+        <Heading color={rawStakedBalance === 0 ? 'textDisabled' : 'text'}>{displayBalance}</Heading>
+        {renderStakingButtons()}
+      </Flex>
+      <Flex justifyContent="space-between" alignItems="center" paddingTop="5px">
+        <Text color={rawStakedBalance === 0 ? 'textDisabled' : 'text'} fontSize="13px">${displayAmount}</Text>
+      </Flex>
+    </div>
   )
 }
 
