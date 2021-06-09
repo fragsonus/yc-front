@@ -115,6 +115,22 @@ const farms: FarmConfig[] = [
     quoteTokenAdresses: contracts.cake,
   },
   {
+    pid: 22,
+    risk: 1,
+    lpSymbol: 'ycSDR-yumcha',
+    lpAddresses: {
+      97: '',
+      56: '0x6ae47b3feeb9467e5a07fee0767bf29171d17511',
+    },
+    tokenSymbol: 'ycSDR',
+    tokenAddresses: {
+      97: '',
+      56: '0x0493f4196e53eae3640587c119850cca56f94224',
+    },
+    quoteTokenSymbol: QuoteToken.CAKE,
+    quoteTokenAdresses: contracts.cake,
+  },
+  {
     pid: 2,
     risk: 5,
     isTokenOnly: true,
