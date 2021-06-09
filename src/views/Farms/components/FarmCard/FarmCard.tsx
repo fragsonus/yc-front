@@ -86,11 +86,12 @@ interface FarmCardProps {
   removed: boolean
   cakePrice?: BigNumber
   bnbPrice?: BigNumber
+  sdrPrice?: BigNumber
   ethereum?: provider
   account?: string
 }
 
-const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice, ethereum, account }) => {
+const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice, sdrPrice, ethereum, account }) => {
   const TranslateString = useI18n()
 
   const [showExpandableSection, setShowExpandableSection] = useState(false)
@@ -113,11 +114,34 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
     if (farm.quoteTokenSymbol === QuoteToken.CAKE) {
       return cakePrice.times(farm.lpTotalInQuoteToken)
     }
+    if (farm.quoteTokenSymbol === QuoteToken.ycSDR) {
+      return sdrPrice.times(farm.lpTotalInQuoteToken)
+    }
     return farm.lpTotalInQuoteToken
-  }, [bnbPrice, cakePrice, farm.lpTotalInQuoteToken, farm.quoteTokenSymbol])
+  }, [bnbPrice, cakePrice, sdrPrice, farm.lpTotalInQuoteToken, farm.quoteTokenSymbol])
 
   const totalValueFormated = totalValue
   ? `$${Number(totalValue).toLocaleString(undefined, { maximumFractionDigits: 0 })}`
+  : '-'
+
+  const totalValueMC: BigNumber = useMemo(() => {
+    if (!farm.lpTotalInQuoteToken) {
+      return null
+    }
+    if (farm.quoteTokenSymbol === QuoteToken.BNB) {
+      return bnbPrice.times(farm.lpTotalInQuoteToken).div(farm.lpTokenRatio)
+    }
+    if (farm.quoteTokenSymbol === QuoteToken.CAKE) {
+      return cakePrice.times(farm.lpTotalInQuoteToken).div(farm.lpTokenRatio)
+    }
+    if (farm.quoteTokenSymbol === QuoteToken.ycSDR) {
+      return sdrPrice.times(farm.lpTotalInQuoteToken).div(farm.lpTokenRatio)
+    }
+    return bnbPrice.times(farm.lpTotalInQuoteToken).div(farm.lpTokenRatio).div(bnbPrice)
+  }, [bnbPrice, cakePrice, sdrPrice, farm.lpTotalInQuoteToken, farm.lpTokenRatio, farm.quoteTokenSymbol])
+
+  const totalValueMCFormated = totalValueMC
+  ? `$${Number(totalValueMC).toLocaleString(undefined, { maximumFractionDigits: 0 })}`
   : '-'
 
   const tokenPrice: BigNumber = useMemo(() => {
@@ -130,8 +154,11 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
     if (farm.quoteTokenSymbol === QuoteToken.CAKE) {
       return cakePrice.times(farm.tokenPriceVsQuote)
     }
+    if (farm.quoteTokenSymbol === QuoteToken.ycSDR) {
+      return sdrPrice.times(farm.tokenPriceVsQuote)
+    }
     return farm.tokenPriceVsQuote
-  }, [bnbPrice, cakePrice, farm.tokenPriceVsQuote, farm.quoteTokenSymbol])
+  }, [bnbPrice, cakePrice, sdrPrice, farm.tokenPriceVsQuote, farm.quoteTokenSymbol])
 
   const tokenPriceFormatted = tokenPrice
   ? `$${Number(tokenPrice).toLocaleString(undefined, { maximumFractionDigits: 3 })}`
@@ -147,8 +174,11 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
     if (farm.quoteTokenSymbol === QuoteToken.CAKE) {
       return cakePrice.times(farm.lpTotalInQuoteToken).div(farm.lpSupply)
     }
+    if (farm.quoteTokenSymbol === QuoteToken.ycSDR) {
+      return sdrPrice.times(farm.lpTotalInQuoteToken).div(farm.lpSupply)
+    }
     return bnbPrice.times(farm.lpTotalInQuoteToken).div(farm.lpSupply).div(bnbPrice)
-  }, [bnbPrice, cakePrice, farm.lpTotalInQuoteToken, farm.quoteTokenSymbol, farm.lpSupply])
+  }, [bnbPrice, cakePrice, sdrPrice, farm.lpTotalInQuoteToken, farm.quoteTokenSymbol, farm.lpSupply])
 
   const LpPriceFormatted = LpPrice
   ? `${Number(LpPrice).toLocaleString(undefined, { maximumFractionDigits: 3 })}`
@@ -158,7 +188,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
   const earnLabel = 'Yumcha'
   const farmAPY =
     farm.apy &&
-    farm.apy.div(farm.quoteTokenSymbol === QuoteToken.CAKE ? (cakePrice) : 1 ).times(new BigNumber(100)).toNumber().toLocaleString(undefined, {
+    farm.apy.div(farm.quoteTokenSymbol === QuoteToken.CAKE ? (cakePrice) : 1 ).div(farm.quoteTokenSymbol === QuoteToken.ycSDR ? (sdrPrice) : 1 ).times(new BigNumber(100)).toNumber().toLocaleString(undefined, {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     })
@@ -177,8 +207,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
         tokenSymbol={farm.tokenSymbol}
       /> */}
       <Text bold style={{fontSize: "30px"}}>
-        {lpLabel}
-      </Text>
+        {lpLabel}   
+      </Text>      
       <DetailsSection
         removed={removed}
         isTokenOnly={farm.isTokenOnly}
@@ -200,14 +230,6 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
           <Text bold style={{ display: 'flex', alignItems: 'center', fontSize: "20px", paddingBottom: "10px"}}>
             {farm.apy ? (
               <>
-                {/* <ApyButton
-                  lpLabel={lpLabel}
-                  quoteTokenAdresses={quoteTokenAdresses}
-                  quoteTokenSymbol={quoteTokenSymbol}
-                  tokenAddresses={tokenAddresses}
-                  cakePrice={cakePrice}
-                  apy={farm.apy}
-                /> */}
                 {farmAPY}%
               </>
             ) : (
@@ -233,8 +255,12 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
         <Text>${LpPriceFormatted}</Text>
       </Flex>
       <Flex justifyContent="space-between">
-        <Text>{TranslateString(10007, 'TVL')}</Text>
+        <Text>TVL Staked</Text>
         <Text>{totalValueFormated}</Text>
+      </Flex>
+      <Flex justifyContent="space-between">
+        <Text>TVL Total</Text>
+        <Text>{totalValueMCFormated}</Text>
       </Flex>
       <Divider />
       {/* <ExpandableSectionButton
@@ -244,6 +270,16 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
       {/* <ExpandingWrapper expanded={showExpandableSection}> */}
        <CardActionsContainer farm={farm} ethereum={ethereum} account={account} LpPrice={LpPriceFormatted}/>
       {/* </ExpandingWrapper> */}
+      {/* <Text bold style={{fontSize: "30px"}}>
+        <ApyButton
+          lpLabel={lpLabel}
+          quoteTokenAdresses={quoteTokenAdresses}
+          quoteTokenSymbol={quoteTokenSymbol}
+          tokenAddresses={tokenAddresses}
+          cakePrice={cakePrice}
+          apy={farm.apy}
+        />  
+      </Text> */}
     </FCard>
   )
 }

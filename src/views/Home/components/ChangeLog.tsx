@@ -48,7 +48,7 @@ const ChangeLog = () => {
         <Row><Text fontSize="13px" style={{textAlign: "justify"}}>We trialled various peg methodologies including asset backed and synthetics. We also experienced a substantial stress test on the peg which provided valuable information on optimal strategies.</Text></Row>
         <Row><Text bold fontSize="13px" style={{textAlign: "justify"}}>Phase 2 Optimisation - 28 May 2021 to Current</Text></Row>
         <Row><Text fontSize="13px" style={{textAlign: "justify"}}>Registration of Perimetry Ptd Ltd to bridge the gap between real world shares and cryptocurrency.</Text></Row>
-        <Row><Text fontSize="13px" style={{textAlign: "justify"}}>Commencement of yield farming with collateral to buyback and burn yumcha tokens.</Text></Row>
+        <Row><Text fontSize="13px" style={{textAlign: "justify"}}>Commencement of yield farming with collateral to buyback and burn yumcha + LP tokens.</Text></Row>
         <Row><Text fontSize="13px" style={{textAlign: "justify"}}>Updated front end to address concerns from users from POC stage.</Text></Row>
       </CardBody>
     </StyledCakeStats>

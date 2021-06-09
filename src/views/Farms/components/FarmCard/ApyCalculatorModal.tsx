@@ -53,77 +53,18 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
   const cakeEarnedPerThousand365D = calculateCakeEarnedPerThousandDollars({ numberOfDays: 365, farmApy, cakePrice })
 
   return (
-    <Modal title="ROI" onDismiss={onDismiss}>
-      <Grid>
-        <GridItem>
-          <Text fontSize="12px" bold color="textSubtle" textTransform="uppercase" mb="20px">
-            {TranslateString(999, 'Timeframe')}
-          </Text>
-        </GridItem>
-        <GridItem>
-          <Text fontSize="12px" bold color="textSubtle" textTransform="uppercase" mb="20px">
-            {TranslateString(999, 'ROI')}
-          </Text>
-        </GridItem>
-        <GridItem>
-          <Text fontSize="12px" bold color="textSubtle" textTransform="uppercase" mb="20px">
-            {TranslateString(999, 'Yumcha per $1000')}
-          </Text>
-        </GridItem>
-        {/* 1 day row */}
-        <GridItem>
-          <Text>1d</Text>
-        </GridItem>
-        <GridItem>
-          <Text>
-            {apyModalRoi({ amountEarned: cakeEarnedPerThousand1D, amountInvested: oneThousandDollarsWorthOfCake })}%
-          </Text>
-        </GridItem>
-        <GridItem>
-          <Text>{cakeEarnedPerThousand1D}</Text>
-        </GridItem>
-        {/* 7 day row */}
-        <GridItem>
-          <Text>7d</Text>
-        </GridItem>
-        <GridItem>
-          <Text>
-            {apyModalRoi({ amountEarned: cakeEarnedPerThousand7D, amountInvested: oneThousandDollarsWorthOfCake })}%
-          </Text>
-        </GridItem>
-        <GridItem>
-          <Text>{cakeEarnedPerThousand7D}</Text>
-        </GridItem>
-        {/* 30 day row */}
-        <GridItem>
-          <Text>30d</Text>
-        </GridItem>
-        <GridItem>
-          <Text>
-            {apyModalRoi({ amountEarned: cakeEarnedPerThousand30D, amountInvested: oneThousandDollarsWorthOfCake })}%
-          </Text>
-        </GridItem>
-        <GridItem>
-          <Text>{cakeEarnedPerThousand30D}</Text>
-        </GridItem>
-        {/* 365 day / APY row */}
-        <GridItem>
-          <Text>365d(APY)</Text>
-        </GridItem>
-        <GridItem>
-          <Text>
-            {apyModalRoi({ amountEarned: cakeEarnedPerThousand365D, amountInvested: oneThousandDollarsWorthOfCake })}%
-          </Text>
-        </GridItem>
-        <GridItem>
-          <Text>{cakeEarnedPerThousand365D}</Text>
-        </GridItem>
-      </Grid>
+    <Modal title="Information" onDismiss={onDismiss}>
       <Description fontSize="12px" color="textSubtle">
-        {TranslateString(
-          999,
-          'Calculated based on current rates. Compounding once daily. Rates are estimates provided for your convenience only, and by no means represent guaranteed returns.',
-        )}
+        Yumcha is the project token which is provided to liquidity stakers and earns revenue generated from yields from the collateral.
+      </Description>
+      <Description fontSize="12px" color="textSubtle">
+        ycVT token is pegged to VT - Vanguard World Total Stocks ETF which covers equities all over the world by market cap.
+      </Description>
+      <Description fontSize="12px" color="textSubtle">
+        ycSDR token is pegged to SDR - IMF Special Drawing Rights which is a basket of world currencies.
+      </Description>
+      <Description fontSize="12px" color="textSubtle">
+        You can find more information in the docs located <a href="/yc-front/info">here</a>.
       </Description>
       <Flex justifyContent="center">
         <LinkExternal href={`https://exchange.pancakeswap.finance/#/add/${liquidityUrlPathParts}`}>

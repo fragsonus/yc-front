@@ -7,7 +7,7 @@ import { useTotalSupply, useBurnedBalance } from 'hooks/useTokenBalance'
 import useI18n from 'hooks/useI18n'
 import { getCakeAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
-import { useFarms, usePriceCakeBusd, useTotalValue } from '../../../state/hooks'
+import { useFarms, usePriceCakeBusd, useTotalValue, useTotalValueYC, useTotalValueYCStaked } from '../../../state/hooks'
 
 const StyledCakeStats = styled(Card)`
   margin-left: auto;
@@ -32,6 +32,8 @@ const InfoCard = () => {
   const cakeSupply = getBalanceNumber(circSupply)
   const marketCap = ycPrice.times(circSupply)
   const totalValue = useTotalValue()
+  const totalValueYC = useTotalValueYC()
+  const totalValueYCStaked = useTotalValueYCStaked()
 
   let yumchaPerBlock = 0
   if (farms && farms[0] && farms[0].yumchaPerBlock) {
@@ -42,16 +44,24 @@ const InfoCard = () => {
     <StyledCakeStats>
       <CardBody>
         <Row><Text bold>What is yumcha?</Text></Row>
-        <Row><Text fontSize="13px" style={{textAlign: "justify"}}>Yumcha produces pegged assets (dimSims) which simulate the price of real-world assets. The collateral is used to generate revenue for yumcha tokens via buyback and burn.</Text></Row>
+        <Row><Text fontSize="13px" style={{textAlign: "justify"}}>Yumcha produces pegged assets (dimSims) which simulate the price of real-world assets. The collateral is used to generate revenue for yumcha tokens via buyback to create LPs to burn.</Text></Row>
         <Row><Text bold fontSize="13px" style={{textAlign: "justify"}}>Pegged dimSims</Text></Row>
-        <Row><Text fontSize="13px" style={{textAlign: "justify"}}>Each dimSim that is in circulation is backed by a reserve of equivalent value and can be exchanged for stable cryptocurrency of equivalent value.</Text></Row>
-        <Row><Text fontSize="13px" style={{textAlign: "justify"}}>The reserve is hedged against the price movement of real-world asset via Perimetry Pty Ltd (based in Australia).</Text></Row>
-        <Row><Text fontSize="13px" style={{textAlign: "justify"}}>The reserve is utilised to collect yields from farming platforms. These yields are used to buyback yumcha tokens.</Text></Row>
+        <Row><Text fontSize="13px" style={{textAlign: "justify"}}>Each dimSim that is in circulation is backed by a reserve of equivalent value and can be exchanged for stable cryptocurrency of equivalent value. The reserve is hedged against the price movement of real-world asset via Perimetry Pty Ltd (based in Australia).</Text></Row>
         <Row><Text bold fontSize="13px" style={{textAlign: "justify"}}>Liquidity provision</Text></Row>
         <Row><Text fontSize="13px" style={{textAlign: "justify"}}>Providing liquidity via PancakeSwapV2 and staking on this website allows you to earn yumcha tokens. In addition, liquidity providers also earn 0.17% from every transaction.</Text></Row>
+        <Row><Text fontSize="13px" style={{textAlign: "justify"}}>Revenue generated from the collateral is used to provide burned / locked liquidity that continually increases the floor price of yumcha.</Text></Row>
+        
         <Row>
-          <Text fontSize="13px" style={{textAlign: "justify"}}>The total value of assets staked is:</Text>
+          <Text fontSize="13px" style={{textAlign: "justify"}}>The total value of all assets is:</Text>
           <CardValue fontSize="13px" value={totalValue.toNumber()} prefix="$" decimals={2} />
+        </Row>
+        <Row>
+          <Text fontSize="13px" style={{textAlign: "justify"}}>- This includes staked LPs paired with yumcha token:</Text>
+          <CardValue fontSize="13px" value={totalValueYCStaked.toNumber()} prefix="$" decimals={2} />
+        </Row>
+        <Row>
+          <Text fontSize="13px" style={{textAlign: "justify"}}>- And locked or burned LPs paired with yumcha token:</Text>
+          <CardValue fontSize="13px" value={totalValueYC.toNumber()-totalValueYCStaked.toNumber()} prefix="$" decimals={2} />
         </Row>
       </CardBody>
     </StyledCakeStats>

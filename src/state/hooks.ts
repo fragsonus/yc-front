@@ -83,23 +83,96 @@ export const usePriceCakeBusd = (): BigNumber => {
   return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : ZERO
 }
 
+export const usePriceSdrBUSD = (): BigNumber => {
+  // const pid = 1 // CAKE-BNB LP
+  // const bnbPriceUSD = usePriceBnbBusd()
+  // const farm = useFarmFromPid(pid)
+  // return farm.tokenPriceVsQuote ? bnbPriceUSD.times(farm.tokenPriceVsQuote) : ZERO
+  const pid = 20 // SDR-BUSD LP
+  const farm = useFarmFromPid(pid)
+  return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : ZERO
+}
+
 export const useTotalValue = (): BigNumber => {
   const farms = useFarms()
   const bnbPrice = usePriceBnbBusd()
   const cakePrice = usePriceCakeBusd()
+  const sdrPrice = usePriceSdrBUSD()
   let value = new BigNumber(0)
   for (let i = 0; i < farms.length; i++) {
     const farm = farms[i]
     if (farm.lpTotalInQuoteToken) {
       let val
       if (farm.quoteTokenSymbol === QuoteToken.BNB) {
-        val = bnbPrice.times(farm.lpTotalInQuoteToken)
+        val = bnbPrice.times(farm.lpTotalInQuoteToken).div(farm.lpTokenRatio)
       } else if (farm.quoteTokenSymbol === QuoteToken.CAKE) {
-        val = cakePrice.times(farm.lpTotalInQuoteToken)
-      } else {
+        val = cakePrice.times(farm.lpTotalInQuoteToken).div(farm.lpTokenRatio)
+      } else if (farm.quoteTokenSymbol === QuoteToken.ycSDR) {
+        val = sdrPrice.times(farm.lpTotalInQuoteToken).div(farm.lpTokenRatio)
+      } else if (farm.pid === 17) {
         val = farm.lpTotalInQuoteToken
+      } else {
+        val = bnbPrice.times(farm.lpTotalInQuoteToken).div(bnbPrice).div(farm.lpTokenRatio)
       }
       value = value.plus(val)
+    }
+  }
+  return value
+}
+
+export const useTotalValueYC = (): BigNumber => {
+  const farms = useFarms()
+  const bnbPrice = usePriceBnbBusd()
+  const cakePrice = usePriceCakeBusd()
+  const sdrPrice = usePriceSdrBUSD()
+  let value = new BigNumber(0)
+  for (let i = 0; i < farms.length; i++) {
+    const farm = farms[i]
+    if (farm.lpTotalInQuoteToken) {
+      let val
+      if (farm.lpSymbol.includes('yumcha')){
+        if (farm.quoteTokenSymbol === QuoteToken.BNB) {
+          val = bnbPrice.times(farm.lpTotalInQuoteToken).div(farm.lpTokenRatio)
+        } else if (farm.quoteTokenSymbol === QuoteToken.CAKE) {
+          val = cakePrice.times(farm.lpTotalInQuoteToken).div(farm.lpTokenRatio)
+        } else if (farm.quoteTokenSymbol === QuoteToken.ycSDR) {
+          val = sdrPrice.times(farm.lpTotalInQuoteToken).div(farm.lpTokenRatio)
+        } else if (farm.pid === 2) {
+          val = 0
+        } else {
+          val = bnbPrice.times(farm.lpTotalInQuoteToken).div(bnbPrice).div(farm.lpTokenRatio)
+        }
+        value = value.plus(val)
+      }
+    }
+  }
+  return value
+}
+
+export const useTotalValueYCStaked = (): BigNumber => {
+  const farms = useFarms()
+  const bnbPrice = usePriceBnbBusd()
+  const cakePrice = usePriceCakeBusd()
+  const sdrPrice = usePriceSdrBUSD()
+  let value = new BigNumber(0)
+  for (let i = 0; i < farms.length; i++) {
+    const farm = farms[i]
+    if (farm.lpTotalInQuoteToken) {
+      let val
+      if (farm.lpSymbol.includes('yumcha')){
+        if (farm.quoteTokenSymbol === QuoteToken.BNB) {
+          val = bnbPrice.times(farm.lpTotalInQuoteToken)
+        } else if (farm.quoteTokenSymbol === QuoteToken.CAKE) {
+          val = cakePrice.times(farm.lpTotalInQuoteToken)
+        } else if (farm.quoteTokenSymbol === QuoteToken.ycSDR) {
+          val = sdrPrice.times(farm.lpTotalInQuoteToken)
+        } else if (farm.pid === 2) {
+          val = 0
+        } else {
+          val = bnbPrice.times(farm.lpTotalInQuoteToken).div(bnbPrice)
+        }
+        value = value.plus(val)
+      }
     }
   }
   return value

@@ -61,6 +61,10 @@ const fetchFarms = async () => {
       let lpTotalInQuoteToken
       const lpSupply = new BigNumber(lpTokenBalanceMC).div(new BigNumber(10).pow(18))
       let tokenPriceVsQuote
+
+      // Ratio in % a LP tokens that are in staking, vs the total number in circulation
+      let lpTokenRatio
+      
       if (farmConfig.isTokenOnly) {
         tokenAmount = new BigNumber(lpTokenBalanceMC).div(new BigNumber(10).pow(tokenDecimals))
         if (farmConfig.tokenSymbol === QuoteToken.BUSD && farmConfig.quoteTokenSymbol === QuoteToken.BUSD) {
@@ -69,10 +73,10 @@ const fetchFarms = async () => {
           tokenPriceVsQuote = new BigNumber(quoteTokenBlanceLP).div(new BigNumber(tokenBalanceLP))
         }
         lpTotalInQuoteToken = tokenAmount.times(tokenPriceVsQuote)
+        lpTokenRatio = new BigNumber(1)
       } else {
-        // Ratio in % a LP tokens that are in staking, vs the total number in circulation
-        const lpTokenRatio = new BigNumber(lpTokenBalanceMC).div(new BigNumber(lpTotalSupply))
-
+        lpTokenRatio = new BigNumber(lpTokenBalanceMC).div(new BigNumber(lpTotalSupply))
+        
         // Total value in staking in quote token value
         lpTotalInQuoteToken = new BigNumber(quoteTokenBlanceLP)
           .div(new BigNumber(10).pow(18))
@@ -116,6 +120,7 @@ const fetchFarms = async () => {
         tokenAmount: tokenAmount.toJSON(),
         // quoteTokenAmount: quoteTokenAmount.toJSON(),
         lpSupply: lpSupply.toJSON(),
+        lpTokenRatio: lpTokenRatio.toJSON(),
         lpTotalInQuoteToken: lpTotalInQuoteToken.toJSON(),
         tokenPriceVsQuote: tokenPriceVsQuote.toJSON(),
         poolWeight: poolWeight.toNumber(),

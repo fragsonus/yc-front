@@ -27,4 +27,8 @@ export default {
     56: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
     97: '',
   },
+  ycSDR: {
+    56: '0x0493f4196e53eae3640587c119850cca56f94224',
+    97: '',
+  },
 }

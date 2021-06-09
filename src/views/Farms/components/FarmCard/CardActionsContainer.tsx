@@ -36,6 +36,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account, 
   const lpName = farm.lpSymbol.toUpperCase()
   const lpTotal = farm.lpTotalInQuoteToken
   const lpSupply = farm.lpSupply
+  const lpTokenRatio = farm.lpTokenRatio
   const isApproved = account && allowance && allowance.isGreaterThan(0)
 
   const lpContract = useMemo(() => {

@@ -6,6 +6,7 @@ export interface Farm extends FarmConfig {
   // quoteTokenAmount?: BigNumber
   lpSupply?: BigNumber
   lpTotalInQuoteToken?: BigNumber
+  lpTokenRatio?: BigNumber
   tokenPriceVsQuote?: BigNumber
   poolWeight?: number
   depositFeeBP?: number

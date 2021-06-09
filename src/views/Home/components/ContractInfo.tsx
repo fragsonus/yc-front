@@ -48,6 +48,12 @@ const ContractInfo = () => {
         <Row><Text fontSize="13px">0xe3641C835d9e441f2F36D96c89E19BEDB5E991e7</Text></Row>
         <Row><Text bold fontSize="13px">ycVT</Text></Row>
         <Row><Text fontSize="13px">0x7D0943bD8225848Ecd84Cdec36c39f4470494F07</Text></Row>
+        <Row><Text bold fontSize="13px">ycSDR</Text></Row>
+        <Row><Text fontSize="13px">0x0493f4196e53eae3640587c119850cca56f94224</Text></Row>
+        <Row><Text bold fontSize="13px">Collateral Vault 1</Text></Row>
+        <Row><Text fontSize="13px">0xBC1e8dE7D302F50714c99814340A3bF2639Fd55b</Text></Row>
+        <Row><Text bold fontSize="13px">Collateral Value 2</Text></Row>
+        <Row><Text fontSize="13px">0x2f3Da052FaAE4Df8fF98BC9029a32920AD0aFcA1</Text></Row>
       </CardBody>
     </StyledCakeStats>
   )
