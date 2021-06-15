@@ -19,6 +19,7 @@ import Perimetry from './components/Perimetry'
 import VanguardInfo from './components/VanguardInfo'
 import SDRInfo from './components/SDRInfo'
 import ContractInfo from './components/ContractInfo'
+import Statistics from './components/Statistics'
 import InfoCard from './components/InfoCard'
 import TotalValueLockedCard from './components/TotalValueLockedCard'
 import TwitterCard from './components/TwitterCard'
@@ -99,6 +100,7 @@ const Home: React.FC = () => {
       <Divider />
       <div>
         <Cards>
+          <Statistics />
           <InfoCard />
           <CakeStats />
           <ChangeLog />

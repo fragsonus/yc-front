@@ -50,19 +50,6 @@ const InfoCard = () => {
         <Row><Text bold fontSize="13px" style={{textAlign: "justify"}}>Liquidity provision</Text></Row>
         <Row><Text fontSize="13px" style={{textAlign: "justify"}}>Providing liquidity via PancakeSwapV2 and staking on this website allows you to earn yumcha tokens. In addition, liquidity providers also earn 0.17% from every transaction.</Text></Row>
         <Row><Text fontSize="13px" style={{textAlign: "justify"}}>Revenue generated from the collateral is used to provide burned / locked liquidity that continually increases the floor price of yumcha.</Text></Row>
-        
-        <Row>
-          <Text fontSize="13px" style={{textAlign: "justify"}}>The total value of all assets is:</Text>
-          <CardValue fontSize="13px" value={totalValue.toNumber()} prefix="$" decimals={2} />
-        </Row>
-        <Row>
-          <Text fontSize="13px" style={{textAlign: "justify"}}>- This includes staked LPs paired with yumcha token:</Text>
-          <CardValue fontSize="13px" value={totalValueYCStaked.toNumber()} prefix="$" decimals={2} />
-        </Row>
-        <Row>
-          <Text fontSize="13px" style={{textAlign: "justify"}}>- And locked or burned LPs paired with yumcha token:</Text>
-          <CardValue fontSize="13px" value={totalValueYC.toNumber()-totalValueYCStaked.toNumber()} prefix="$" decimals={2} />
-        </Row>
       </CardBody>
     </StyledCakeStats>
   )
